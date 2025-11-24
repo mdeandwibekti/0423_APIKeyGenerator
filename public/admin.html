@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Registrasi</title>
+    <style>
+        /* Tema Cyber Neon Teal */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0f12, #00151c);
+            color: #d9faff;
+            display: flex;
+            justify-content: center;
+            padding: 2rem 0;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(10, 22, 27, 0.75);
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 420px;
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        h2 {
+            border-bottom: 2px solid rgba(0, 255, 255, 0.35);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #00eaff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #a8f6ff;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            border: 1px solid #0d3c46;
+            background-color: #05171d;
+            color: #c9faff;
+            transition: 0.25s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #00f7ff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.35);
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        /* Tombol admin tetap orange namun lebih kontras */
+        .btn-orange {
+            background: linear-gradient(135deg, #ff7b00, #cc5d00);
+            color: white;
+            box-shadow: 0 0 10px rgba(255, 140, 0, 0.25);
+        }
+
+        .btn-orange:hover {
+            background: linear-gradient(135deg, #ffa044, #d46c05);
+            box-shadow: 0 0 16px rgba(255, 140, 0, 0.55);
+        }
+
+        /* Message */
+        .message {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            padding: 10px;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .success {
+            background: rgba(0, 255, 150, 0.15);
+            color: #8dffda;
+            display: block;
+        }
+
+        .error {
+            background: rgba(255, 0, 50, 0.15);
+            color: #ff9ba5;
+            display: block;
+        }
+
+        .nav-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #6df1ff;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .nav-link:hover {
+            color: #aefeff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Panel Admin</h2>
+    <p style="color:#9deaff; font-size:0.9rem;">Registrasi Administrator Baru</p>
+
+    <label>Email Admin</label>
+    <input type="email" id="aEmail" placeholder="admin@system.com">
+
+    <label>Password</label>
+    <input type="password" id="aPass" placeholder="Rahasia123">
+
+    <button id="regAdminBtn" class="btn-orange">Daftar Admin</button>
+    <div id="adminMsg" class="message"></div>
+
+    <a href="/" class="nav-link">← Kembali ke Halaman Utama</a>
+</div>
+
+<script>
+    function showMsg(elId, text, isError = false) {
+        const el = document.getElementById(elId);
+        el.textContent = text;
+        el.className = isError ? 'message error' : 'message success';
+        setTimeout(() => { el.style.display = 'none'; }, 5000);
+    }
+
+    document.getElementById('regAdminBtn').addEventListener('click', async () => {
+        const payload = {
+            email: document.getElementById('aEmail').value,
+            password: document.getElementById('aPass').value
+        };
+
+        try {
+            const res = await fetch('/register/admin', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+
+            if (res.ok) {
+                showMsg('adminMsg', data.message);
+                document.getElementById('aEmail').value = '';
+                document.getElementById('aPass').value = '';
+            } else {
+                showMsg('adminMsg', data.error, true);
+            }
+        } catch {
+            showMsg('adminMsg', 'Error jaringan', true);
+        }
+    });
+</script>
+
+</body>
+</html>

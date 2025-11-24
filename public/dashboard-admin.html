@@ -1,0 +1,53 @@
+<!-- dashboard-admin.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .menu {
+            margin-top: 20px;
+        }
+        .menu button {
+            display: block;
+            width: 200px;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #059669;
+            border: none;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .menu button:hover {
+            background: #047857;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard Admin</h1>
+        <p>Selamat datang, Admin!</p>
+
+        <div class="menu">
+            <button onclick="window.location.href='dashboard-user.html'">Daftar User</button>
+            <button onclick="window.location.href='index.html'">Logout</button>
+        </div>
+    </div>
+</body>
+</html>

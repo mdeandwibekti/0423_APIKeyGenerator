@@ -1,0 +1,54 @@
+<!-- dashboard-user.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard User</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .btn {
+            padding: 10px 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard User</h1>
+        <p>Selamat datang, User!</p>
+        <button class="btn" onclick="window.location.href='index.html'">Kembali ke Login</button>
+    </div>
+</body>
+</html>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const notif = urlParams.get("notif");
+
+    if (notif === "success") {
+        alert("User berhasil ditambahkan!");
+    }
+</script>
+
+
